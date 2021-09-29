@@ -1,17 +1,14 @@
 package com.API;
 
 public abstract class DeviceSpecs {
-    private String name;
+    protected String name;
     private double default_value;
     private double max;
     private double min;
 
+
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public void setDefault_value(double default_value) {
