@@ -1,0 +1,189 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > TopologyCLI</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.main</a>
+</div>
+
+<h1>Coverage Summary for Class: TopologyCLI (com.main)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TopologyCLI</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/48)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;// Java program to read JSON from a file
+<i class="no-highlight">2</i>&nbsp;package com.main;
+<i class="no-highlight">3</i>&nbsp;
+<i class="no-highlight">4</i>&nbsp;import com.api.Topology;
+<i class="no-highlight">5</i>&nbsp;import com.api.TopologyManager;
+<i class="no-highlight">6</i>&nbsp;import com.io.TopologyIO;
+<i class="no-highlight">7</i>&nbsp;import org.json.simple.parser.ParseException;
+<i class="no-highlight">8</i>&nbsp;
+<i class="no-highlight">9</i>&nbsp;import javax.naming.CannotProceedException;
+<i class="no-highlight">10</i>&nbsp;import java.io.IOException;
+<i class="no-highlight">11</i>&nbsp;import java.util.NoSuchElementException;
+<i class="no-highlight">12</i>&nbsp;import java.util.Scanner;
+<i class="no-highlight">13</i>&nbsp;
+<b class="nc"><i class="no-highlight">14</i>&nbsp;public class TopologyCLI {</b>
+<i class="no-highlight">15</i>&nbsp;    void start() {
+<i class="no-highlight">16</i>&nbsp;        Topology topology;
+<b class="nc"><i class="no-highlight">17</i>&nbsp;        final TopologyManager topologyManager = new TopologyManager();</b>
+<b class="nc"><i class="no-highlight">18</i>&nbsp;        final Scanner scanner = new Scanner(System.in);</b>
+<b class="nc"><i class="no-highlight">19</i>&nbsp;        final TopologyIO io = new TopologyIO();</b>
+<b class="nc"><i class="no-highlight">20</i>&nbsp;        final String operations = &quot;1. Read\n 2. Write\n 3. Query Topologies\n 4. Delete Topology\n 5. Query Devices\n 6. Query Devices with Netlist Node\n 7. Quit&quot;;</b>
+<b class="nc"><i class="no-highlight">21</i>&nbsp;        final String intro = &quot;TOPOLOGY API\n Enter your operation&#39;s number:\n &quot; + operations;</b>
+<b class="nc"><i class="no-highlight">22</i>&nbsp;        System.out.println(intro);</b>
+<i class="no-highlight">23</i>&nbsp;        while (true) {
+<b class="nc"><i class="no-highlight">24</i>&nbsp;            final String operation = scanner.nextLine();</b>
+<i class="no-highlight">25</i>&nbsp;            try {
+<b class="nc"><i class="no-highlight">26</i>&nbsp;                switch (operation) {</b>
+<i class="no-highlight">27</i>&nbsp;                    case &quot;1&quot;:
+<b class="nc"><i class="no-highlight">28</i>&nbsp;                        System.out.println(&quot;Enter file path:&quot;);</b>
+<b class="nc"><i class="no-highlight">29</i>&nbsp;                        final String filePath = scanner.nextLine();</b>
+<b class="nc"><i class="no-highlight">30</i>&nbsp;                        topology = io.readJSONTopology(filePath);</b>
+<b class="nc"><i class="no-highlight">31</i>&nbsp;                        topologyManager.addTopology(topology);</b>
+<b class="nc"><i class="no-highlight">32</i>&nbsp;                        System.out.println(&quot;Done!&quot;);</b>
+<b class="nc"><i class="no-highlight">33</i>&nbsp;                        break;</b>
+<i class="no-highlight">34</i>&nbsp;                    case &quot;2&quot;:
+<b class="nc"><i class="no-highlight">35</i>&nbsp;                        inputID();</b>
+<b class="nc"><i class="no-highlight">36</i>&nbsp;                        String id = scanner.nextLine();</b>
+<b class="nc"><i class="no-highlight">37</i>&nbsp;                        topology = topologyManager.getTopology(id);</b>
+<b class="nc"><i class="no-highlight">38</i>&nbsp;                        System.out.println(topology.getClass());</b>
+<b class="nc"><i class="no-highlight">39</i>&nbsp;                        io.writeJSONTopology(topology);</b>
+<b class="nc"><i class="no-highlight">40</i>&nbsp;                        System.out.println(&quot;Done! You can find your topology.json file at /home/ta7a/IdeaProjects/TopologyAPI/src/resources&quot;);</b>
+<b class="nc"><i class="no-highlight">41</i>&nbsp;                        break;</b>
+<i class="no-highlight">42</i>&nbsp;                    case &quot;3&quot;:
+<b class="nc"><i class="no-highlight">43</i>&nbsp;                        topologyManager.getTopologies().forEach((top) -&gt; System.out.println(top.getId()));</b>
+<b class="nc"><i class="no-highlight">44</i>&nbsp;                        break;</b>
+<i class="no-highlight">45</i>&nbsp;                    case &quot;4&quot;:
+<b class="nc"><i class="no-highlight">46</i>&nbsp;                        inputID();</b>
+<b class="nc"><i class="no-highlight">47</i>&nbsp;                        id = scanner.nextLine();</b>
+<b class="nc"><i class="no-highlight">48</i>&nbsp;                        topologyManager.deleteTopology(id);</b>
+<b class="nc"><i class="no-highlight">49</i>&nbsp;                        System.out.println(&quot;Done!&quot;);</b>
+<b class="nc"><i class="no-highlight">50</i>&nbsp;                        break;</b>
+<i class="no-highlight">51</i>&nbsp;                    case &quot;5&quot;:
+<b class="nc"><i class="no-highlight">52</i>&nbsp;                        inputID();</b>
+<b class="nc"><i class="no-highlight">53</i>&nbsp;                        id = scanner.nextLine();</b>
+<b class="nc"><i class="no-highlight">54</i>&nbsp;                        topology = topologyManager.getTopology(id);</b>
+<b class="nc"><i class="no-highlight">55</i>&nbsp;                        topology.getComponents().forEach((comp) -&gt; System.out.println(comp.getId()));</b>
+<b class="nc"><i class="no-highlight">56</i>&nbsp;                        break;</b>
+<i class="no-highlight">57</i>&nbsp;                    case &quot;6&quot;:
+<b class="nc"><i class="no-highlight">58</i>&nbsp;                        inputID();</b>
+<b class="nc"><i class="no-highlight">59</i>&nbsp;                        id = scanner.nextLine();</b>
+<b class="nc"><i class="no-highlight">60</i>&nbsp;                        topology = topologyManager.getTopology(id);</b>
+<b class="nc"><i class="no-highlight">61</i>&nbsp;                        System.out.println(&quot;Enter Netlist ID:&quot;);</b>
+<b class="nc"><i class="no-highlight">62</i>&nbsp;                        id = scanner.nextLine();</b>
+<b class="nc"><i class="no-highlight">63</i>&nbsp;                        topology.getComponentsWithNetListNode(id).forEach((comp) -&gt; System.out.println(comp.getId()));</b>
+<b class="nc"><i class="no-highlight">64</i>&nbsp;                        break;</b>
+<i class="no-highlight">65</i>&nbsp;                    default:
+<b class="nc"><i class="no-highlight">66</i>&nbsp;                        System.out.println(&quot;Please choose from the specified operations\n &quot; + operations);</b>
+<i class="no-highlight">67</i>&nbsp;                        break;
+<i class="no-highlight">68</i>&nbsp;                }
+<b class="nc"><i class="no-highlight">69</i>&nbsp;            } catch (CannotProceedException | IOException | ParseException | NoSuchElementException e) {</b>
+<b class="nc"><i class="no-highlight">70</i>&nbsp;                System.out.println(e.getMessage());</b>
+<b class="nc"><i class="no-highlight">71</i>&nbsp;            }</b>
+<b class="nc"><i class="no-highlight">72</i>&nbsp;        }</b>
+<i class="no-highlight">73</i>&nbsp;    }
+<i class="no-highlight">74</i>&nbsp;
+<i class="no-highlight">75</i>&nbsp;    void inputID(){
+<b class="nc"><i class="no-highlight">76</i>&nbsp;        System.out.println(&quot;Enter topology ID:&quot;);</b>
+<i class="no-highlight">77</i>&nbsp;    }
+<i class="no-highlight">78</i>&nbsp;
+<i class="no-highlight">79</i>&nbsp;    public static void main(final String[] args) {
+<b class="nc"><i class="no-highlight">80</i>&nbsp;        new TopologyCLI().start();</b>
+<i class="no-highlight">81</i>&nbsp;    }
+<i class="no-highlight">82</i>&nbsp;}
+<i class="no-highlight">83</i>&nbsp;
+<i class="no-highlight">84</i>&nbsp;
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-09-30 01:31</div>
+</div>
+</body>
+</html>

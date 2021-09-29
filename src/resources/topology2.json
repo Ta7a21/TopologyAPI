@@ -1,13 +1,13 @@
 {
-  "id": "top1",
+  "id": "top3",
   "components": [
     {
       "type": "resistor",
-      "id": "res1",
+      "id": "res3",
       "resistance": {
-        "default": 500,
-        "min": 50,
-        "max": 5000
+        "default": 300,
+        "min": 30,
+        "max": 3000
       },
       "netlist": {
         "t1": "vdd",
@@ -16,11 +16,11 @@
     },
     {
       "type": "nmos",
-      "id": "m1",
+      "id": "m3",
       "m(l)": {
-        "default": 2.5,
-        "min": 2,
-        "max": 3
+        "default": 3.5,
+        "min": 3,
+        "max": 4
       },
       "netlist": {
         "drain": "n1",
