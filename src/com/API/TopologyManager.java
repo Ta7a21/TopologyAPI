@@ -6,6 +6,15 @@ import java.util.ArrayList;
 public class TopologyManager {
     private ArrayList<Topology> topologies = new ArrayList<>();
 
+    public Topology getTopology(String id){
+        for (int i = 0; i < topologies.size(); i++) {
+            if (topologies.get(i).getId().equals(id)) {
+                return topologies.get(i);
+            }
+        }
+        return null;
+    }
+
     public void deleteTopology(String id) {
         for (int i = 0; i < topologies.size(); i++) {
             if (topologies.get(i).getId().equals(id)) {
