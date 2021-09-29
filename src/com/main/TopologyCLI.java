@@ -35,7 +35,6 @@ public class TopologyCLI {
                         inputID();
                         String id = scanner.nextLine();
                         topology = topologyManager.getTopology(id);
-                        System.out.println(topology.getClass());
                         io.writeJSONTopology(topology);
                         System.out.println("Done! You can find your topology.json file at /home/ta7a/IdeaProjects/TopologyAPI/src/resources");
                         break;
