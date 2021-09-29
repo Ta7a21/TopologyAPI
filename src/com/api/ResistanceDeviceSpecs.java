@@ -1,7 +1,8 @@
-package com.API;
+package com.api;
 
 public class ResistanceDeviceSpecs extends DeviceSpecs {
-    public ResistanceDeviceSpecs(String name) {
+    public ResistanceDeviceSpecs(final String name) {
+        super();
         super.name = name;
     }
 }
